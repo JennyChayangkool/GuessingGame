@@ -7,9 +7,7 @@
 <body>
   <h1>Welcome to the Guessing Game!!</h1>
 
-  <p>I have selected a number between 1 and 10.</p>
-  <p> Can you guess what it is?</p>
-
+  <p id="startMsg">Guess a number between 1 and 10.</p>
   <input type="number" id="guessInput" min="1" max="10">
   <button onclick="makeGuess()">Submit Guess</button>
 
@@ -30,6 +28,7 @@
       document.getElementById("playAgainBtn").style.display = 'none';
       document.getElementById("guessInput").value = '';
       document.getElementById("guessInput").disabled = false;
+      document.getElementById("startMsg").textContent = "Guess a number between 1 and 10.";
     }
 
     function makeGuess() {
@@ -37,12 +36,12 @@
       guessCount++;
 
       if (guess > randomNumber) {
-        document.getElementById("feedback").textContent = "Your guess is too high. Please try again.";
+        document.getElementById("feedback").textContent = "Your guess was too high, guess again.";
       } else if (guess < randomNumber) {
-        document.getElementById("feedback").textContent = "Your guess is too low. Please try again.";
+        document.getElementById("feedback").textContent = "Your guess was too low, guess again.";
       } else{
         document.getElementById("feedback").textContent = "";
-        document.getElementById("result").textContent = `^^ Correct! It took you ${guessCount} guess(es).`;
+        document.getElementById("result").textContent = `You guessed it in ${guessCount} guesses!`;
         document.getElementById("guessInput").disabled = true;
         document.getElementById("playAgainBtn").style.display = 'inline';
       }
