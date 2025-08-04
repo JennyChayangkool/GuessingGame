@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guessing Game</title>
+</head>
+<body>
+  <h1>Welcome to the Guessing Game!!</h1>
+
+  <p>I have selected a number between 1 and 10.</p>
+  <p> Can you guess what it is?</p>
+
+  <input type="number" id="guessInput" min="1" max="10">
+  <button onclick="makeGuess()">Submit Guess</button>
+
+  <p id="feedback"></p>
+  <p id="result"></p>
+  <button id="playAgainBtn" onclick="startGame()" style="display:none;">Play Again</button>
+
+  <script>
+    let randomNumber;
+    let guessCount;
+
+    function startGame() {
+      randomNumber = Math.floor(Math.random() * 10) + 1;
+      guessCount = 0;
+
+      document.getElementById("feedback").textContent = '';
+      document.getElementById("result").textContent = '';
+      document.getElementById("playAgainBtn").style.display = 'none';
+      document.getElementById("guessInput").value = '';
+      document.getElementById("guessInput").disabled = false;
+    }
+
+    function makeGuess() {
+      const guess = parseInt(document.getElementById("guessInput").value);
+      guessCount++;
+
+      if (guess > randomNumber) {
+        document.getElementById("feedback").textContent = "Your guess is too high. Please try again.";
+      } else if (guess < randomNumber) {
+        document.getElementById("feedback").textContent = "Your guess is too low. Please try again.";
+      } else{
+        document.getElementById("feedback").textContent = "";
+        document.getElementById("result").textContent = `^^ Correct! It took you ${guessCount} guess(es).`;
+        document.getElementById("guessInput").disabled = true;
+        document.getElementById("playAgainBtn").style.display = 'inline';
+      }
+    }
+    startGame();
+  </script>
+</body>
+</html>
